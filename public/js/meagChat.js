@@ -1,3 +1,6 @@
+/**
+ * Created by andrea.terzani on 02/04/2015.
+ */
 0/*** @jsx React.DOM */
 
 
@@ -22,7 +25,7 @@ var Chatty = React.createClass({
         socket.on('send:message', this.messageRecieve);
 
 
-        return { user:'',messages:[], text: ''};
+        return { counter:0, user:'',messages:[], text: ''};
     },
 
     initialize: function(data){
@@ -41,13 +44,38 @@ var Chatty = React.createClass({
         console.log("Sent message" +  message);
     },
 
+    tick: function(){
+        var message = {
+            user: this.state.user,
+            text: "Random generate message " + this.state.counter
+        }
+
+        this.state.messages.push(message);
+
+        this.state.counter++;
+        this.setState();
+        socket.emit('send:message', message);
+
+
+    },
+    handleRandomSubmit : function(e){
+        this.interval = setInterval(this.tick, 50);
+    },
+    handleStopSubmit: function(e){
+        clearInterval(this.interval);
+    },
+
     render: function(){
         return(
             <div className="chatty">
 
                 <Title text={this.state.user}/>
+                <p> Sent {this.state.counter} random </p>
+                <button type="button" onClick={this.handleRandomSubmit}>Random</button>
+                <button type="button" onClick={this.handleStopSubmit}>Stop</button>
                 <MessageForm user={this.state.user} submitfnc={this.handleMessageSubmit}/>
                 <MessageList messages={this.state.messages}/>
+
             </div>
         );
     }
@@ -57,12 +85,12 @@ var MessageList = React.createClass({
 
     render: function () {
         var renderMessage = function(message){
-            return <Message usr={message.user} msg={message.msg} />
+            return <Message usr={message.user} msg={message.text} />
         }
         return(
-        <ul className="message">
+            <ul className="message">
             { this.props.messages.map(renderMessage)}
-        </ul>
+            </ul>
         );
     }
 });
@@ -89,11 +117,11 @@ var MessageForm = React.createClass({
     },
     render:function(){
         return(
-          <div className="messageForm">
-              <form onSubmit={this.handleSubmit} >
-                  <input onChange={this.changeHandler} value={this.state.text}/>
-              </form>
-          </div>
+            <div className="messageForm">
+                <form onSubmit={this.handleSubmit} >
+                    <input onChange={this.changeHandler} value={this.state.text}/>
+                </form>
+            </div>
         );
     }
 });
@@ -109,6 +137,6 @@ var Message = React.createClass({
 
 
 React.render(
-<Chatty />,
+    <Chatty />,
     document.getElementById('container')
 );

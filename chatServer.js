@@ -18,7 +18,7 @@ module.exports = function(httpServer) {
     io.on('connection', function (socket) {
         console.log(socket.id);
 
-        Message.find({}).sort('-date').limit(10).exec(function(err, mess){
+        Message.find({}).sort('-created').limit(10).exec(function(err, mess){
 
             console.log("New user...");
             socket.emit('init',{user:getuser(),mess:mess});
@@ -36,6 +36,7 @@ module.exports = function(httpServer) {
                 user: data.user
             });
 
+
             savemessage(data);
 
 
@@ -50,12 +51,15 @@ module.exports = function(httpServer) {
         var msg = new Message();
         msg.msg=message.text;
         msg.user=message.user;
+        msg.created = new Date();
 
         msg.save(function(err) {
             if (err) {
                 console.log("error saving message");
             }
         });
+
+
 
     };
 
