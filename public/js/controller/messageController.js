@@ -6,31 +6,60 @@ app.controller('messageController', function($scope,$http,mySocket) {
     $scope.messages = [{'message':'Prova'},{'message':'Prova2'}];
     $scope.message={'message':'','latitude':42.23232,'longitude':12.2345};
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(setPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
+    $scope.alertmsg = 'Aquiring position...' ;
+    $scope.loading=true;
 
-    var mapOptions = {
-        center: { lat:  $scope.message.latitude, lng: $scope.message.longitude},
-        zoom: 4
-    };
-    $scope.map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
+
+
+
+
+        $http.get('api/location').success(function(data){
+            $scope.messages = data;
+        });
+
+
+        var mapOptions = {
+            center: { lat:  $scope.message.latitude, lng: $scope.message.longitude},
+            zoom: 4
+        };
+
+
+        $scope.map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(setPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+
+        var mapOptions = {
+            center: { lat:  $scope.message.latitude, lng: $scope.message.longitude},
+            zoom: 4
+        };
+
+        $scope.map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
 
 
 
     function setPosition(position){
 
-        $scope.message.latitude  = position.coords.latitude;
-        $scope.message.longitude = position.coords.longitude;
+        $scope.$apply(function () {
+            $scope.message.latitude  = position.coords.latitude;
+            $scope.message.longitude = position.coords.longitude;
 
+            $scope.alertmsg = "Position aquired";
+            $scope.loading = false;
+        });
 
         $scope.map.panTo(new google.maps.LatLng( position.coords.latitude, position.coords.longitude));
 
 
     }
+
+
+
 
 
 
@@ -62,9 +91,7 @@ app.controller('messageController', function($scope,$http,mySocket) {
     });
 
 
-    $http.get('api/location').success(function(data){
-        $scope.messages = data;
-    });
+
 
     $scope.messageClick=function(message){
         var marker = new google.maps.Marker({
@@ -119,7 +146,6 @@ app.controller('messageController', function($scope,$http,mySocket) {
 
         }
     };
-
 
 
 
