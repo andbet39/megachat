@@ -19,15 +19,10 @@ module.exports = function(httpServer) {
         console.log(socket.id);
 
         Message.find({}).sort('-created').limit(10).exec(function(err, mess){
-
-            console.log("New user...");
             socket.emit('init',{user:getuser(),mess:mess});
-            console.log("Emitted  message" + mess);
         });
 
 
-
-        // broadcast a user's message to other users
         socket.on('send:message', function (data) {
             console.log("Received send:message");
 
@@ -36,9 +31,7 @@ module.exports = function(httpServer) {
                 user: data.user
             });
 
-
             savemessage(data);
-
 
         });
 
@@ -58,8 +51,6 @@ module.exports = function(httpServer) {
                 console.log("error saving message");
             }
         });
-
-
 
     };
 
