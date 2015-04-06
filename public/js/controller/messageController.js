@@ -34,7 +34,7 @@ app.controller('messageController', function($scope,$http,mySocket) {
 
 
 
-    mySocket.on('send:locmessage',function(mess){
+    mySocket.on('send:message',function(mess){
 
         console.log(mess);
         var marker = new google.maps.Marker({
@@ -87,19 +87,36 @@ app.controller('messageController', function($scope,$http,mySocket) {
 
     };
 
+
     $scope.saveMessage = function(message){
-    console.log('SaveMessage');
 
-        if(message.message != '') {
-            $http.post('api/location', message)
-                .success(function (data) {
-                    // $scope.messages.push(data);
-                    $scope.message.message = '';
+        console.log('SaveMessage');
 
-                })
-                .error(function (data, status, headers, config) {
+        if($scope.message.message != '') {
 
-                })
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(message.latitude,message.longitude),
+                map: $scope.map,
+                animation: google.maps.Animation.DROP,
+            });
+
+
+
+            marker.info = new google.maps.InfoWindow({
+                content: $scope.message.message
+            });
+
+            marker.info.open($scope.map, marker);
+            setTimeout(function () {
+                marker.setMap(null);
+                delete marker;
+            }, 5000);
+
+            mySocket.emit('send:message',message);
+            $scope.messages.push(message);
+
+
         }
     };
 

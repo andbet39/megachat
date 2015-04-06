@@ -11,7 +11,14 @@ module.exports = function(app,httpServer) {
     io.on('connection', function (socket) {
         console.log(socket.id);
 
+        socket.on('send:message', function (data) {
+            console.log("Received send:message");
 
+            socket.broadcast.emit('send:message', data);
+
+            saveMessage(data);
+
+        });
 
     });
 
@@ -45,6 +52,22 @@ module.exports = function(app,httpServer) {
 
     });
 
+
+    function saveMessage(mess){
+
+        var l =  new Location();
+        l.message = mess.message;
+        var loc = [mess.longitude,mess.latitude];
+        l.coordinates=loc;
+        l.created = new Date();
+
+        l.save(function(err) {
+            if (err) {
+                console.log("error saving message");
+
+            }
+        });
+    }
 
     app.get('/api/geojson', function(req, res) {
 
