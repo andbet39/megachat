@@ -85,7 +85,8 @@ app.controller('messageController', function($scope,$http,mySocket) {
                 delete marker;
             }, 5000);
 
-        $scope.messages.push(mess);
+        $scope.messages.push(angular.copy(mess));
+
 
 
     });
@@ -141,7 +142,10 @@ app.controller('messageController', function($scope,$http,mySocket) {
             }, 5000);
 
             mySocket.emit('send:message',message);
-            $scope.messages.push(message);
+            $scope.messages.push(angular.copy(message));
+
+            $scope.message.message='';
+            
 
 
         }

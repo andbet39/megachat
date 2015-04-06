@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="18b46b23-94a9-4723-93c6-2f4ccbcd1804" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/location.html" afterPath="$PROJECT_DIR$/public/location.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/controller/messageController.js" afterPath="$PROJECT_DIR$/public/js/controller/messageController.js" />
     </list>
     <ignored path="codetutorial-mean-stack-seed.iws" />
@@ -34,10 +33,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="location.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="location.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/location.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4992743">
+            <state vertical-scroll-proportion="-14.333333">
               <caret line="45" column="34" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -57,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="messageController.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="messageController.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/js/controller/messageController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.82047683">
+              <caret line="147" column="12" selection-start-line="147" selection-start-column="12" selection-end-line="147" selection-end-column="12" />
               <folding>
                 <element signature="e#0#48#0" expanded="false" />
               </folding>
@@ -160,8 +159,8 @@
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/server/model/locationModel.js" />
         <option value="$PROJECT_DIR$/server/routes/location.js" />
-        <option value="$PROJECT_DIR$/public/js/controller/messageController.js" />
         <option value="$PROJECT_DIR$/public/location.html" />
+        <option value="$PROJECT_DIR$/public/js/controller/messageController.js" />
       </list>
     </option>
   </component>
@@ -1002,23 +1001,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/controller/messageController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#48#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/location.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4992743">
+        <state vertical-scroll-proportion="-14.333333">
           <caret line="45" column="34" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/controller/messageController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.82047683">
+          <caret line="147" column="12" selection-start-line="147" selection-start-column="12" selection-end-line="147" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#48#0" expanded="false" />
           </folding>
         </state>
       </provider>
