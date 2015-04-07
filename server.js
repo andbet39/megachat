@@ -36,7 +36,8 @@ app.use(cors());
 
 
 //var chat =  require('./chatServer.js')(httpServer);
-var location = require('./server/routes/location.js')(app,httpServer);
+var auth = require('./server/routes/auth.js')(app);
+//var location = require('./server/routes/location.js')(app,httpServer);
 
 
 

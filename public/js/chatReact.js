@@ -81,7 +81,7 @@ var MessageForm = React.createClass({
         e.preventDefault();
         var message = {
             user : this.props.user,
-            text : this.state.text
+            msg : this.state.text
         }
 
         this.props.submitfnc(message);

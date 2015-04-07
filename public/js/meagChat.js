@@ -47,7 +47,7 @@ var Chatty = React.createClass({
     tick: function(){
         var message = {
             user: this.state.user,
-            text: "Random generate message " + this.state.counter
+            msg: "Random generate message " + this.state.counter
         }
 
         this.state.messages.push(message);
@@ -59,7 +59,7 @@ var Chatty = React.createClass({
 
     },
     handleRandomSubmit : function(e){
-        this.interval = setInterval(this.tick, 50);
+        this.interval = setInterval(this.tick, 20);
     },
     handleStopSubmit: function(e){
         clearInterval(this.interval);
@@ -74,7 +74,6 @@ var Chatty = React.createClass({
                 <button type="button" onClick={this.handleRandomSubmit}>Random</button>
                 <button type="button" onClick={this.handleStopSubmit}>Stop</button>
                 <MessageForm user={this.state.user} submitfnc={this.handleMessageSubmit}/>
-                <MessageList messages={this.state.messages}/>
 
             </div>
         );
@@ -85,7 +84,7 @@ var MessageList = React.createClass({
 
     render: function () {
         var renderMessage = function(message){
-            return <Message usr={message.user} msg={message.text} />
+            return <Message usr={message.user} msg={message.msg} />
         }
         return(
             <ul className="message">
