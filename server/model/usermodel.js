@@ -15,6 +15,24 @@ var UserSchema = new Schema({
     password: {
         type: String,
         trim: true
+    },
+    facebook         : {
+        id:{
+            type: String,
+            trim: true
+        },
+        token:{
+            type: String
+        },
+        displayName:{
+            type: String
+        },
+        email:{
+            type: String
+        },
+        profileUrl:{
+            type: String
+        }
     }
 
 });

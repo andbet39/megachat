@@ -145,7 +145,7 @@ app.controller('messageController', function($scope,$http,mySocket) {
             $scope.messages.push(angular.copy(message));
 
             $scope.message.message='';
-            
+
 
 
         }
