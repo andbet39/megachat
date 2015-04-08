@@ -53,36 +53,25 @@ module.exports = function(app) {
             clientID: '1598215213755624',
             clientSecret: 'c019a55f66e96fbb30d1dc882e64406a',
             callbackURL: "http://localhost:3000/auth/facebook/callback"
-        },
-        function(accessToken, refreshToken, profile, done) {
+        },function(accessToken, refreshToken, profile, done) {
             process.nextTick(function () {
-
                 User.findOne({'email': profile.emails[0].value}, function (err, user) {
-                    console.log(user);
                     if (err) return done(err);
-
                     if (user) {
                         done(null, user);
                     } else {
-                        console.log(profile);
-                        var u = new User();
-                        u.username = profile.emails[0].value;
-                        u.facebook.token = accessToken;
-                        u.facebookprofileUrl = profile.profileUrl;
-                        u.facebook.email = profile.emails[0].value;
-                        u.facebook.fbid = profile.id;
-                        u.facebook.displayName = profile.displayName;
+                        var user = new User();
+                        user.username = profile.emails[0].value;
+                        user.facebook.token = accessToken;
+                        user.facebookprofileUrl = profile.profileUrl;
+                        user.facebook.email = profile.emails[0].value;
+                        user.facebook.fbid = profile.id;
+                        user.facebook.displayName = profile.displayName;
 
 
-                        u.save(function (err) {
-                            if (err) {
-                                console.log("error saving new user");
-                                return done(err);
-
-                            } else {
-                                console.log("new user : login done")
+                        user.save(function (err) {
+                            if (err) return done(err);
                                 done(null, user);
-                            }
                         });
                     }
                 });
@@ -110,29 +99,21 @@ module.exports = function(app) {
 
     app.get('/auth/facebook', passport.authenticate('facebook', {scope:'email'}));
 
-    app.post('/login', passport.authenticate('local'),function(req, res){
+    app.post('/auth/login', passport.authenticate('local'),function(req, res){
         res.json(req.user);
     });
 
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', { failureRedirect: '/login.html' }),
         function(req, res) {
-            res.redirect('/currentuser');
+            res.redirect('/login.html');
         });
 
-    app.get('/currentuser',isAuthenticated,function(req,res){
-
-           res.json(req.user);
-
+    app.get('/auth/currentuser',isAuthenticated,function(req,res){
+        res.json(req.user);
     });
 
-    app.get('/test',function(req,res){
-
-        res.json({'result':'ok'});
-
-    });
-
-    app.post('/api/user',function(req,res){
+    app.post('/auth/user',function(req,res){
 
         var u =  new User();
         u.username = req.body.username;
@@ -146,6 +127,11 @@ module.exports = function(app) {
             }
         });
     });
+
+     app.get('/auth/logout', function(req, res){
+        req.logout();
+        res.redirect('/login.html');
+     });
 
 
 

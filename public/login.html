@@ -18,26 +18,45 @@
 <script src="js/app.js"></script>
 <script src="js/controller/authController.js"></script>
 <link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.css">
+<link rel="stylesheet" href="css/style.css">
 
-<div class="container" ng-app="locationApp">
-    <div class="row" ng-controller="authController">
-        <div class="col md6">
-        {{alert}}
-            <div>
-                <label>Username:</label>
-                <input type="text" ng-model="user.username"/>
-            </div>
-            <div>
-                <label>Password:</label>
-                <input type="password" ng-model ="user.password"/>
-            </div>
-                 <button ng-click="login(user)"/> Log in </button>
+
+    <div class="row mainrow center" ng-app="locationApp" ng-controller="authController">
+    <div class="row">
+        <div class="col l6">
+
+                <h1>Login</h1>
+
         </div>
-        <div class="row" >
-            <div class="col md6"><a href="/auth/facebook">Login with Facebook</a></div>
+    </div>
+    <div class="row">
+    <div class="col center" >
+         <div class="login-panel z-depth-3">
+             {{alert}}
+                 <div class="input-field">
+                    <i class="mdi-action-account-circle prefix"></i>
+                     <input type="email" id="email" ng-model="user.username" maxlength="30" required="">
+                    <label for="email">email</label>
+                </div>
+                <div class="input-field">
+                    <i class="mdi-communication-vpn-key prefix"></i>
+                    <input type="password" id="password" ng-model ="user.password" maxlength="30" required="">
+                    <label for="password">Password</label>
+                </div>
+                <div class="center-btn">
+                    <button type="submit" ng-click="login(user)" class="waves-effect waves-light btn" id="vstoupit"><i class="mdi-hardware-keyboard-arrow-right right"></i>Login</button>
+                    <a class="waves-effect waves-light btn"  href="/auth/facebook"><i class="mdi-social-person-add left"></i>Login with Facebook</a>
+                 </div>
+         </div>
+        <!-- Konec Přihlašovací formulář -->
+    </div>
+    </div>
 
-    </div>
-    </div>
+
+        <div class="row" >
+            <button ng-click="logout()">Logout {{loggeduser.username}}</button>
+            {{loggeduser}}
+         </div>
 
 </div>
-</body>
+ </body>
