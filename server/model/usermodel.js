@@ -16,8 +16,8 @@ var UserSchema = new Schema({
         type: String,
         trim: true
     },
-    facebook         : {
-        id:{
+    facebook: {
+        fbid:{
             type: String,
             trim: true
         },
